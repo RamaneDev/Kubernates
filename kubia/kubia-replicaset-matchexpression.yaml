@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: kubia-match-expression
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kubiaExpression 
+  template:
+    metadata:
+      labels:
+        app: kubiaExpression
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
