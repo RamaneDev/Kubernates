@@ -1,1 +1,1 @@
-$ kubectl get ns
+$ kubectl get po --namespace kube-system
