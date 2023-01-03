@@ -1,1 +1,1 @@
-$ docker tag kubia luksa/kubia
+$ docker push luksa/kubia
