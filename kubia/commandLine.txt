@@ -1,1 +1,1 @@
-$ docker stop kubia-container
+$ docker rm kubia-container
