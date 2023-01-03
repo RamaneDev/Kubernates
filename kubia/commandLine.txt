@@ -1,1 +1,1 @@
-$ gcloud compute ssh gke-kubia-default-pool-b46381f1-zwko
+$ kubectl edit rc kubia
