@@ -1,1 +1,1 @@
-$ kubectl scale rc kubia --replicas=3
+$ kubectl get pods -o wide
