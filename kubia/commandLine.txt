@@ -1,1 +1,1 @@
-$ docker logs <container id>
+ kubectl logs kubia-manual
