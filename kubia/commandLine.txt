@@ -1,1 +1,1 @@
-$ kubectl get po --show-labels
+$ kubectl get po -L creation_method,env
