@@ -1,1 +1,1 @@
-$ kubectl get po -L creation_method,env
+$ kubectl label po kubia-manual creation_method=manual
