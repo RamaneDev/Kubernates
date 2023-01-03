@@ -1,1 +1,2 @@
-$ kubectl delete po -l creation_method=manual
+$ kubectl delete ns custom-namespace
+will delete pods inder the custom-namespace
