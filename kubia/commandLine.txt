@@ -1,1 +1,1 @@
-$ kubectl get pods -o wide
+$ kubectl describe pod kubia-hczji
