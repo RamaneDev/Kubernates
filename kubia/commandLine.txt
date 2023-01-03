@@ -1,1 +1,1 @@
-$ kubectl get replicationcontrollers
+$ kubectl scale rc kubia --replicas=3
