@@ -1,13 +1,1 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: kubia-liveness
-spec:
-  containers:
-    - image: luksa/kubia-unhealthy
-      name: kubia
-      livenessProbe:            # defining liveness prob to ckeck health of owr container
-        httpGet:
-          path: /
-          port: 8080
-        initialDelaySeconds: 15 # k8s start to prob container after 15s of its start
+$ gcloud compute ssh gke-kubia-default-pool-b46381f1-zwko
