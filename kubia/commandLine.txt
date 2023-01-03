@@ -1,1 +1,1 @@
-$ docker run busybox echo "Hello world"
+$ docker run <image>:<tag>
