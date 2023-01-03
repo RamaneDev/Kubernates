@@ -1,1 +1,1 @@
-$ docker rm kubia-container
+$ docker tag kubia luksa/kubia
