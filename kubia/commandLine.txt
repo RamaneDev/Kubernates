@@ -1,1 +1,7 @@
-$ kubectl get po --namespace kube-system
+$ kubectl create -f custom-namespace.yaml
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: custom-namespace 
