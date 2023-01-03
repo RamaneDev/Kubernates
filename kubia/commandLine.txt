@@ -1,1 +1,1 @@
-$ kubectl label po kubia-manual-v2 env=debug --overwrite
+$ kubectl get po -l creation_method=manual
