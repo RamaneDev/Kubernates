@@ -1,1 +1,1 @@
-$ kubectl edit rc kubia
+$ kubectl delete rc kubia --cascade=false
