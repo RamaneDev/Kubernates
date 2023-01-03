@@ -1,1 +1,1 @@
-$ kubectl get pods
+$ kubectl expose rc kubia --type=LoadBalancer --name kubia-http
