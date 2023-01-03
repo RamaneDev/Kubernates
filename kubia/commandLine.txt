@@ -1,1 +1,1 @@
-$ kubectl describe pod kubia-hczji
+$ kubectl get po kubia-zxzij -o yaml
