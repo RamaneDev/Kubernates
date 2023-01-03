@@ -1,1 +1,1 @@
-$ kubectl delete po kubia-gpu
+$ kubectl delete po -l creation_method=manual
