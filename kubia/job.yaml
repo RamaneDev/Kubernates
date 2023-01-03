@@ -31,3 +31,4 @@ spec:
 #       containers:
 #       - name: main
 #         image: luksa/batch-job
+# to scale job kubectl scale job multi-completion-batch-job --replicas 3 will change parallelism property
