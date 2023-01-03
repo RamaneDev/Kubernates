@@ -1,8 +1,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: batch-job
+  name: mutli-completion
 spec:
+  completions: 3     # nomber of job must run
+  parallelism: 2     # 2 jobs can run in parallel
   template:
     metadata:
       labels:
@@ -12,3 +14,20 @@ spec:
       containers:
       - name: main
         image: luksa/batch-job
+
+
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: mutli-completion
+# spec:
+#   completions: 3     # nomber of job must run sequentially not in parallel
+#   template:
+#     metadata:
+#       labels:
+#         app: batch-job
+#     spec:
+#       restartPolicy: OnFailure
+#       containers:
+#       - name: main
+#         image: luksa/batch-job
