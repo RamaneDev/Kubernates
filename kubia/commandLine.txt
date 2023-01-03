@@ -1,1 +1,2 @@
- kubectl logs kubia-manual
+$ kubectl port-forward kubia-manual 8888:8080
+the pod will be accessible by $ curl localhost:8888
