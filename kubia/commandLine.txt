@@ -1,1 +1,1 @@
- kubectl delete po --all
+$ kubectl delete all --all
