@@ -1,1 +1,1 @@
-$ docker run <image>:<tag>
+$ docker build -t kubia .
