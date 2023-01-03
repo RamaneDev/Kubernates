@@ -1,1 +1,1 @@
-$ kubectl create -f kubia-manual.yaml -n custom-namespace
+$ kubectl delete po kubia-gpu
