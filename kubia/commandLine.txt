@@ -1,1 +1,1 @@
-$ kubectl delete rc kubia --cascade=false
+kubectl exec kubia-7nog1 -- curl -s http://10.111.249.153
