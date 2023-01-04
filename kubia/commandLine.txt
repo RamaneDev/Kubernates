@@ -1,1 +1,1 @@
-$ kubectl exec -it kubia-3inly bash
+ curl http://kubia.default.svc.cluster.local
