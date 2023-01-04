@@ -1,3 +1,1 @@
-kubectl exec kubia-7nog1 -- curl -s http://10.111.249.153
-
-after -- the commandLine will be executed inside pod remotely
+$ kubectl exec -it kubia-3inly bash
