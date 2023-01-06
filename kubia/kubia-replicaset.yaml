@@ -15,3 +15,8 @@ spec:
       containers:
       - name: kubia
         image: luksa/kubia
+        readinessProbe:   # adding readinessProbe -> we must delete existing pods and 
+          exec:           # leting replicaset to generate new pods in order to take effect
+            command:
+            - ls
+            - /var/ready
