@@ -1,0 +1,11 @@
+apiVersion: v1                   # this manifest is decoupled from infra, and it can reused
+kind: PersistentVolumeClaim   
+metadata:
+ name: mongodb-pvc
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: ""
