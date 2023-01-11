@@ -1,1 +1,1 @@
-gcloud container clusters list  ->  get a list of cluster in GKE
+gcloud compute disks create mongodb --zone=europe-west4-a --size=10GB
