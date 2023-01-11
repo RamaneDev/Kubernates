@@ -1,1 +1,1 @@
- curl http://kubia.default.svc.cluster.local
+gcloud container clusters list  ->  get a list of cluster in GKE
