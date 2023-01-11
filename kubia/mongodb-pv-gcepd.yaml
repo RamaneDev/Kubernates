@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: mongodb-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce      # nomber of worker nodes that can use the volume, not number of pod! 
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain  # after the claim is released, the persistent volume shoud be retained not erased or deleted
+  gcePersistentDisk:
+    pdName: mongodb                      # is coupled to the infra by this type of volume
+    fsType: ext4 
