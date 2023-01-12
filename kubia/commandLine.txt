@@ -1,1 +1,1 @@
-gcloud compute disks list
+kubectl get sc
