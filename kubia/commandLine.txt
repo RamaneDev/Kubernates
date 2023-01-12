@@ -1,1 +1,1 @@
-kubectl get pv
+gcloud compute disks list
