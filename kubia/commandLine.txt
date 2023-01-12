@@ -1,1 +1,1 @@
-kubectl get sc
+docker build -t docker.io/luksa/fortune:args .
