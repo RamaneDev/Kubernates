@@ -1,1 +1,1 @@
-gcloud compute disks create mongodb --zone=europe-west4-a --size=10GB
+kubectl get pvc
