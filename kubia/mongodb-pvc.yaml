@@ -1,11 +1,13 @@
 apiVersion: v1                   # this manifest is decoupled from infra, and it can reused
 kind: PersistentVolumeClaim   
 metadata:
- name: mongodb-pvc-2
+ name: mongodb-pvc-3
 spec:
   resources:
     requests:
-      storage: 100Mi
+      storage: 2Gi
   accessModes:
   - ReadWriteOnce
-  storageClassName: fast
+  storageClassName: standard  # K8s (GKE) will use the storageClassName called standard (we cas see it by listing storageClass by commandLine)
+                              # we can make standard storageClass as the default storageClass to use and we can omit the storageClassName field
+                              # setting this field to "" ensures the PVC binds to a pre-provisioned PV instead of dynamically provisionning a new one         
