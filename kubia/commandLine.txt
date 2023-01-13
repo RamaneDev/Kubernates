@@ -1,1 +1,8 @@
- kubectl create configmap fortune-config --from-literal=sleep-interval=25
+kubectl create configmap myconfigmap --from-literal=foo=bar --from-literal=bar=baz --from-literal=one=two
+
+
+name : myconfigmap
+entry 1 : 
+  -key:foo
+  -value:bar 
+and so on until entry 3
