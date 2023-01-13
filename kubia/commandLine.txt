@@ -1,3 +1,2 @@
-kubectl create configmap my-config --from-file=customkey=config-file.conf
-
+ kubectl create configmap my-config --from-file=/path/to/dir
 
