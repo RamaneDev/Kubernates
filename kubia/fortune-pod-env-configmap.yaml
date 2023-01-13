@@ -27,3 +27,32 @@ spec:
   volumes:                                 # defining a volume type emptyDir with name:html
     - name: html
       emptyDir: {}
+
+# if we have match ENV to create ..., its well to passe them by configMap object 
+# When our ConfigMap contains more than just a few entries, it becomes tedious and
+# error-prone to create environment variables from each entry individually :
+
+  # env:
+  #   - name: INTERVAL                      
+  #     valueFrom:                          
+  #       configMapKeyRef:
+  #         name: fortune-config           
+  #         key: sleep-interval   
+
+# Luckily,
+# Kubernetes version 1.6 provides a way to expose all entries of a ConfigMap as environment variables.
+#  Imagine having a ConfigMap with three keys called FOO, BAR, and FOO-BAR. You can
+# expose them all as environment variables by using the envFrom attribute, instead of
+# env the way you did in previous examples. The following listing shows an example.
+
+      # spec:
+      # containers:
+      # - image: some-image
+      #   envFrom:              # using envFrom instead of env
+      #   - prefix: CONFIG_     # All environment variables will be prefixed with CONFIG_ (but the prefix is optional, so if we omit it the 
+                                # environment variables will have the same name as the keys
+                                # the format of name of the keys must be valid to be taked as name of ENV )
+      #     configMapRef:
+      #       name: my-config-map
+
+
