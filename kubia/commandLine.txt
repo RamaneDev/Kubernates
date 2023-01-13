@@ -1,6 +1,1 @@
-kind: Pod
-spec:
- containers:
- - image: some/image
- command: ["/bin/command"]        <---- will replace ENTRYPOINT in Dockerfile (it's too rare to override ENTRYPOINT or executable file)
- args: ["arg1", "arg2", "arg3"]   <---- will replace CMD in Dockerfile
+ kubectl create configmap fortune-config --from-literal=sleep-interval=25
