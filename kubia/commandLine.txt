@@ -1,8 +1,8 @@
- volumes:
- -  name: config
-    configMap:
-        name: fortune-config
-        items:                           # selecting which entries to include in the volume by listing them
-        - key: my-nginx-config.conf      # you want the entry under this key included
-          path: gzip.conf                # the entry's value should be stored in this file.
-
+spec:
+ containers:
+ - image: some/image
+   volumeMounts:
+   - name: myvolume
+     mountPath: /etc/someconfig.conf     # we'are mounting into a file, not a directory
+     subPath: myconfig.conf              # instead of mounting the whole volume, we'are only mounitng the myconfig.conf entry   
+                                         # it works also with directories
