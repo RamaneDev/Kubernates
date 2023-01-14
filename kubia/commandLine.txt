@@ -1,6 +1,8 @@
-$ kubectl create configmap my-config
-➥ --from-file=foo.json
-➥ --from-file=bar=foobar.conf
-➥ --from-file=config-opts/
-➥ --from-literal=some=thing 
+ volumes:
+ -  name: config
+    configMap:
+        name: fortune-config
+        items:                           # selecting which entries to include in the volume by listing them
+        - key: my-nginx-config.conf      # you want the entry under this key included
+          path: gzip.conf                # the entry's value should be stored in this file.
 
