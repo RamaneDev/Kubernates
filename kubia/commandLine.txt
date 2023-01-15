@@ -1,8 +1,1 @@
-spec:
- containers:
- - image: some/image
-   volumeMounts:
-   - name: myvolume
-     mountPath: /etc/someconfig.conf     # we'are mounting into a file, not a directory
-     subPath: myconfig.conf              # instead of mounting the whole volume, we'are only mounitng the myconfig.conf entry   
-                                         # it works also with directories
+openssl genrsa -out https.key 2048
