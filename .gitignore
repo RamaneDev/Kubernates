@@ -1,2 +1,5 @@
 kubia/tls.key
 kubia/tls.cert
+kubia/https.key
+kubia/https.cert
+kubia/foo
