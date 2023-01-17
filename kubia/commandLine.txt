@@ -1,20 +1,3 @@
-curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes
+NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
 
-we can export "--cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt" to ENV 
-to make command easier to use and after that we can use only : curl https://kubernetes commandLine
-
-to export into  ENV we can use the following commande :
-
-export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-
-after doing that the server will getting Unauthorized response from the K8S Server API rest
-
-in order to get response wi have to bind a token with request : 
-
-first w'll store token in ENV  by this command
-
-TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-
-and then, send it in header request like that : 
-
-root@curl:/# curl -H "Authorization: Bearer $TOKEN" https://kubernetes
+we can use the same method for storing other varible like token...
