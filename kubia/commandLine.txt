@@ -1,3 +1,1 @@
-NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-
-we can use the same method for storing other varible like token...
+curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/namespaces/$NS/pods
