@@ -1,1 +1,1 @@
-kubectl rollout status deployment kubia
+kubectl set image deployment kubia nodejs=luksa/kubia:v2
