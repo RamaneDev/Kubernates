@@ -1,1 +1,1 @@
- kubectl rollout history deployment kubia
+kubectl rollout undo deployment kubia --to-revision=1
