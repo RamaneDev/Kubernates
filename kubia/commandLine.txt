@@ -1,1 +1,1 @@
-curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/namespaces/$NS/pods
+ kubectl create -f kubia-deployment-v1.yaml --record
