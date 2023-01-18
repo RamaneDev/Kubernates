@@ -1,1 +1,1 @@
-kubectl set image deployment kubia nodejs=luksa/kubia:v2
+ kubectl rollout undo deployment kubia
