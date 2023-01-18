@@ -1,1 +1,1 @@
- kubectl create -f kubia-deployment-v1.yaml --record
+kubectl rollout status deployment kubia
