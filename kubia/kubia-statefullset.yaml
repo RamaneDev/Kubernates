@@ -4,7 +4,7 @@ metadata:
   name: kubia
 spec:
   serviceName: kubia
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: kubia # has to match .spec.template.metadata.labels
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: kubia
-        image: ramane/kubia-pet
+        image: ramane/kubia-pet-peers
         ports:
         - name: http
           containerPort: 8080
