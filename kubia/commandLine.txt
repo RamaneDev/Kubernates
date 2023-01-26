@@ -1,1 +1,1 @@
-kubectl create rolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default -n foo
+kubectl create clusterrolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default
