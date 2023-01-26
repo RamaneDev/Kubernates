@@ -1,1 +1,2 @@
-kubectl create clusterrolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default
+kubectl get clusterrolebindings
+kubectl get clusterroles
