@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role                      # role resource
+metadata:
+  namespace: foo                # Roles object are namespaced (if name-space is omit the current name-space will be used)
+  name: service-reader
+rules:
+- apiGroups: [""]               # Services are resources in the core apiGroup, which has no name – hence the "".    
+  verbs: ["get", "list"]        # this Role allow getting and listing resources
+  resources: ["services"]       # concerned resource : services
+
+
+  
