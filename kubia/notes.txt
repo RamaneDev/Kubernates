@@ -1,21 +1,21 @@
-Adding individual kernel capabilities to a container :
+Dropping capabilities from a container :
+-  For example, the default capabilities given to a
+   container include the CAP_CHOWN capability, which allows processes 
+   to change the ownership of files in the filesystem.
 
-- Instead of making a container privileged and giving it unlimited permissions, a
-  much safer method (from a security perspective) is to give it access only to the kernel
-  features it really requires.
+exemple :
+$ kubectl exec pod-with-defaults -- ls -la / | grep tmp
+  drwxrwxrwt 1 root root 6 May 25 15:00 tmp   (root is the owner)
 
-- Kubernetes allows you to add capabilities to each container
-  or drop part of them, which allows you to fine-tune the container’s permissions and
-  limit the impact of a potential intrusion by an attacker.
+$ kubectl exec pod-with-defaults chown guest /tmp
+$ kubectl exec pod-with-defaults -- ls -la / | grep tmp
+  drwxrwxrwt 2 guest root 6 May 25 15:18 tmp  (guest is the owner)
 
-exemple : the pod-with-defaults can't set the hardware Time :
-    CMD : kubectl exec -it pod-with-defaults -- date +%T -s "12:00:00"
-    RES : date: can't set date: Operation not permitted
+To prevent the container from doing that, you need to drop the capability by listing it
+under the container’s securityContext.capabilities.drop property, 
+see ------>  pod-drop-chown-capability.yaml
 
-- If we want to allow the container to change the system time, 
-  we can add a capability called CAP_SYS_TIME to the container’s 
-  capabilities list ---> see pod-add-settime-capability.yaml
-
-  now if we try w'll see that pod-add-settime-capability can set sys_time : 
-  $ kubectl exec -it pod-add-settime-capability -- date +%T -s "12:00:00"
-  RES : 12:00:00
+test : 
+$ kubectl exec pod-drop-chown-capability chown guest /tmp
+chown: /tmp: Operation not permitted
+command terminated with exit code 1
