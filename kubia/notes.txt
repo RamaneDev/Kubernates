@@ -1,4 +1,7 @@
-Preventing a container from running as root :
-- by setting the spec.containers.securityContext.runAsNonRoot to 'true',
-  the pod will not allow the execution of containers configured as root
-  for test see -----> pod-run-as-non-root.yaml in Git-Repo  
+Running pods in privileged mode: 
+- This is achieved by setting the privileged property 
+  in the container’s securityContext property to true
+  see -------->  pod-privileged.yaml
+  if we ran the command below : 
+  kubectl exec -it pod-privileged ls /dev
+  we'll note the diffrence between a pod-privileged and  pod-with-defaults
