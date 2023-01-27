@@ -1,17 +1,7 @@
-RUNNING A POD WITHOUT SPECIFYING A SECURITY CONTEXT : 
+To run a pod under a different user ID than the one that’s baked into the container
+image, you’ll need to set the pod’s securityContext.runAsUser property. You’ll
+make the container run as user 'guest', whose user ID in the alpine container image is
+405, as shown in ----->  pod-as-user-guest.yaml file in Git-Repo.
 
-CMD : kubectl run pod-with-defaults --image alpine --restart Never -- /bin/sleep 999999
-
-To see in what groupe running this container wi can execute this commande : 
-
-CMD : kubectl exec pod-with-defaults id
-    --> response : 
-    uid=0(root) gid=0(root) groups=0(root), 1(bin), 2(daemon), 3(sys), 4(adm),
-    6(disk), 10(wheel), 11(floppy), 20(dialout), 26(tape), 27(video)
-
-this means that the container is running as root (uid=0) and its groupe is root (gid=0) and
-it's membre of mutiple other groupe 
-
-important --> NOTE : What user the container runs as, is specified in the container image. In
-a Dockerfile, this is done using the USER directive. If omitted, the container
-runs as root.
+after creating a pod with pod-as-user-guest.yaml and execute the id command inside it 
+we'll get : uid=405(guest) gid=100(users)
