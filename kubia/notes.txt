@@ -1,2 +1,2 @@
 - a pod can use PID & IPC namespaces at the node level as hostNetwork property by 
-  setting the PID & IPC property in pod spec see --> 
+  setting the PID & IPC property in pod spec see --> pod-with-host-pid-and-ipc.yaml in Git repo
