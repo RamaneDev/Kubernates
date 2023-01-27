@@ -1,7 +1,21 @@
-Running pods in privileged mode: 
-- This is achieved by setting the privileged property 
-  in the container’s securityContext property to true
-  see -------->  pod-privileged.yaml
-  if we ran the command below : 
-  kubectl exec -it pod-privileged ls /dev
-  we'll note the diffrence between a pod-privileged and  pod-with-defaults
+Adding individual kernel capabilities to a container :
+
+- Instead of making a container privileged and giving it unlimited permissions, a
+  much safer method (from a security perspective) is to give it access only to the kernel
+  features it really requires.
+
+- Kubernetes allows you to add capabilities to each container
+  or drop part of them, which allows you to fine-tune the container’s permissions and
+  limit the impact of a potential intrusion by an attacker.
+
+exemple : the pod-with-defaults can't set the hardware Time :
+    CMD : kubectl exec -it pod-with-defaults -- date +%T -s "12:00:00"
+    RES : date: can't set date: Operation not permitted
+
+- If we want to allow the container to change the system time, 
+  we can add a capability called CAP_SYS_TIME to the container’s 
+  capabilities list ---> see pod-add-settime-capability.yaml
+
+  now if we try w'll see that pod-add-settime-capability can set sys_time : 
+  $ kubectl exec -it pod-add-settime-capability -- date +%T -s "12:00:00"
+  RES : 12:00:00
