@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-host-pid-and-ipc
+spec:
+  hostPID: true                            # with hostPID:true & hostIPC:true, the pod will see process running at node level and will 
+  hostIPC: true                            # be able to interact with them through IPC protocol
+  containers:
+  - name: main
+    image: alpine
+    command: ["/bin/sleep", "999999"]
