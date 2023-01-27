@@ -1,12 +1,17 @@
----Configuring the container’s security context :
+RUNNING A POD WITHOUT SPECIFYING A SECURITY CONTEXT : 
 
-Configuring the security context allows you to do various things:
-- Specify the user (the user’s ID) under which the process in the container will run.
-- Prevent the container from running as root (the default user a container runs
-  as is usually defined in the container image itself, so you may want to prevent
-  containers from running as root).
-- Run the container in privileged mode, giving it full access to the node’s kernel.
-- Configure fine-grained privileges, by adding or dropping capabilities—in contrast to giving the container all possible permissions by running it in privileged mode.
-- Set SELinux (Security Enhanced Linux) options to strongly lock down a
-  container.
-- Prevent the process from writing to the container’s filesystem.
+CMD : kubectl run pod-with-defaults --image alpine --restart Never -- /bin/sleep 999999
+
+To see in what groupe running this container wi can execute this commande : 
+
+CMD : kubectl exec pod-with-defaults id
+    --> response : 
+    uid=0(root) gid=0(root) groups=0(root), 1(bin), 2(daemon), 3(sys), 4(adm),
+    6(disk), 10(wheel), 11(floppy), 20(dialout), 26(tape), 27(video)
+
+this means that the container is running as root (uid=0) and its groupe is root (gid=0) and
+it's membre of mutiple other groupe 
+
+important --> NOTE : What user the container runs as, is specified in the container image. In
+a Dockerfile, this is done using the USER directive. If omitted, the container
+runs as root.
