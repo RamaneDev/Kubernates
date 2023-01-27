@@ -1,2 +1,12 @@
-- a pod can use PID & IPC namespaces at the node level as hostNetwork property by 
-  setting the PID & IPC property in pod spec see --> pod-with-host-pid-and-ipc.yaml in Git repo
+---Configuring the container’s security context :
+
+Configuring the security context allows you to do various things:
+- Specify the user (the user’s ID) under which the process in the container will run.
+- Prevent the container from running as root (the default user a container runs
+  as is usually defined in the container image itself, so you may want to prevent
+  containers from running as root).
+- Run the container in privileged mode, giving it full access to the node’s kernel.
+- Configure fine-grained privileges, by adding or dropping capabilities—in contrast to giving the container all possible permissions by running it in privileged mode.
+- Set SELinux (Security Enhanced Linux) options to strongly lock down a
+  container.
+- Prevent the process from writing to the container’s filesystem.
