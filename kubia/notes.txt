@@ -1,7 +1,4 @@
-To run a pod under a different user ID than the one that’s baked into the container
-image, you’ll need to set the pod’s securityContext.runAsUser property. You’ll
-make the container run as user 'guest', whose user ID in the alpine container image is
-405, as shown in ----->  pod-as-user-guest.yaml file in Git-Repo.
-
-after creating a pod with pod-as-user-guest.yaml and execute the id command inside it 
-we'll get : uid=405(guest) gid=100(users)
+Preventing a container from running as root :
+- by setting the spec.containers.securityContext.runAsNonRoot to 'true',
+  the pod will not allow the execution of containers configured as root
+  for test see -----> pod-run-as-non-root.yaml in Git-Repo  
