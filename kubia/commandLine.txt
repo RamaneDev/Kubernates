@@ -1,2 +1,1 @@
-kubectl get clusterrolebindings
-kubectl get clusterroles
+kubectl create token kubernetes-dashboard -n kubernetes-dashboard
