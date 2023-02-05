@@ -65,4 +65,38 @@ Best practice to develop app for K8S:
                                 \|/
 
                         Container shutdown
-                            initiated     
+                            initiated
+
+- IMPLEMENTING THE PROPER SHUTDOWN HANDLER IN YOUR APPLICATION :
+   -  Applications should react to a SIGTERM signal by starting their shut-down procedure
+      and terminating when it finishes. Instead of handling the SIGTERM signal, the application can be notified to shut down through a pre-stop hook. In both cases, the app
+      then only has a fixed amount of time to terminate cleanly.
+
+   -  if we can’t predict how long the app will take to shut down cleanly (in case of migration
+       data ) 
+        One solution is for the app (upon receipt of a termination signal) to create a new
+        Job resource that would run a new pod, whose sole job is to migrate the deleted pod’s
+        data to the remaining pods. But if you’ve been paying attention, you’ll know that you
+        have no guarantee the app will indeed manage to create the Job object every single
+        time. What if the node fails exactly when the app tries to do that?
+        
+        The proper way to handle this problem is by having a dedicated, constantly running pod that keeps checking for the existence of orphaned data. When this pod finds
+        the orphaned data, it can migrate it to the remaining pods. Rather than a constantly
+        running pod, you can also use a CronJob resource and run the pod periodically.
+        
+        You may think StatefulSets could help here, but they don’t. As you’ll remember,
+        scaling down a StatefulSet leaves PersistentVolumeClaims orphaned, leaving the data
+        stored on the PersistentVolume stranded. Yes, upon a subsequent scale-up, the PersistentVolume will be reattached to the new pod instance, but what if that scale-up never
+        happens (or happens after a long time)? For this reason, you may want to run a
+        data-migrating pod also when using StatefulSets (this scenario is shown in figure 17.6).
+        To prevent the migration from occurring during an application upgrade, the datamigrating pod could be configured to wait a while to give the stateful pod time to
+        come up again before performing the migration.
+
+- Ensuring all client requests are handled properly :
+  - when a pod is starting up : 
+     -> by using the readiness (pods not ready will not be part of endpoints service 
+        only a ready pod can be in endpoints list of service ).
+  
+  - when a pod shut-down :
+     -> UNDERSTANDING THE SEQUENCE OF EVENTS OCCURRING AT POD DELETION (see Docs.docx).
+     -> adding a readiness probe to your pod may solve the problem
