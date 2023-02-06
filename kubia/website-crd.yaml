@@ -20,10 +20,10 @@ spec:
           metadata:
             type: object
           spec:
-            properties:
-              my-own-property:
-                type: string
             type: object
+            properties:
+              gitRepo:
+                type: string          
   names:
     kind: Website
     singular: website
