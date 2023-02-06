@@ -100,3 +100,57 @@ Best practice to develop app for K8S:
   - when a pod shut-down :
      -> UNDERSTANDING THE SEQUENCE OF EVENTS OCCURRING AT POD DELETION (see Docs.docx).
      -> adding a readiness probe to your pod may solve the problem
+
+- Properly tagging your images and using imagePullPolicy wisely:
+        You’ll also soon learn that referring to the latest image tag in your pod manifests will
+    cause problems, because you can’t tell which version of the image each individual pod
+    replica is running. Even if initially all your pod replicas run the same image version, if
+    you push a new version of the image under the latest tag, and then pods are rescheduled 
+    (or you scale up your Deployment), the new pods will run the new version,
+    whereas the old ones will still be running the old one. Also, using the latest tag
+    makes it impossible to roll back to a previous version (unless you push the old version
+    of the image again).
+
+        It’s almost mandatory to use tags containing a proper version designator instead
+    of latest, except maybe in development. Keep in mind that if you use mutable tags
+    (you push changes to the same tag), you’ll need to set the imagePullPolicy field in
+    the pod spec to Always. But if you use that in production pods, be aware of the big
+    caveat associated with it. If the image pull policy is set to Always, the container 
+    runtime will contact the image registry every time a new pod is deployed. This slows
+    down pod startup a bit, because the node needs to check if the image has been modified. 
+    Worse yet, this policy prevents the pod from starting up when the registry cannot be contacted.
+
+- Using multi-dimensional instead of single-dimensional labels:
+    Don’t forget to label all your resources, not only Pods. Make sure you add multiple
+    labels to each resource, so they can be selected across each individual dimension. You
+    (or the ops team) will be grateful you did it when the number of resources increases.
+    Labels may include things like
+        - The name of the application (or perhaps microservice) the resource belongs to
+        - Application tier (front-end, back-end, and so on)
+        - Environment (development, QA, staging, production, and so on)
+        - Version
+        - Type of release (stable, canary, green or blue for green/blue deployments, and
+           so on)
+        - Tenant (if you’re running separate pods for each tenant instead of using namespaces)
+        - Shard for sharded systems
+    This will allow you to manage resources in groups instead of individually and make it
+    easy to see where each resource belongs
+
+- Describing each resource through annotations
+        To add additional information to your resources use annotations. At the least,
+    resources should contain an annotation describing the resource and an annotation
+    with contact information of the person responsible for it.
+    In a microservices architecture, pods could contain an annotation that lists the
+    names of the other services the pod is using. This makes it possible to show dependencies between pods. Other annotations could include build and version information
+    and metadata used by tooling or graphical user interfaces (icon names, and so on).
+    Both labels and annotations make managing running applications much easier, but
+    nothing is worse than when an application starts crashing and you don’t know why.
+
+- Providing information on why the process terminated (to explore in Kubernetes in action book)
+- Handling application logs (to explore in Kubernetes in action book)
+- Best practices for development and testing (to explore in Kubernetes in action book)
+- Using Minikube in development (to explore in Kubernetes in action book)
+- Versioning and auto-deploying resource manifests (to explore in Kubernetes in action book)
+- Ksonnet as an alternative to writing YAML/JSON manifests (to explore in Kubernetes in action book)
+- Employing Continuous Integration and Continuous Delivery (CI/CD) (to explore in generale)
+  
