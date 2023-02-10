@@ -1,16 +1,5 @@
 Extending Kubernetes (last chapter)
-Defining custom API objects:
-        Throughout the book, you’ve learned about the API objects that Kubernetes provides
-    and how they’re used to build application systems. Currently, Kubernetes
-    users mostly use only these objects even though they represent relatively low-level,
-    generic concepts.
+ Providing a custom API server for your custom objects :
+    A better way of adding support for custom objects in Kubernetes is to implement your
+  own API server and have the clients talk directly to it. (to explore in Kubernetes in action book)
 
-        As the Kubernetes ecosystem evolves, you’ll see more and more high-level objects,
-    which will be much more specialized than the resources Kubernetes supports today.
-    Instead of dealing with Deployments, Services, ConfigMaps, and the like, you’ll create
-    and manage objects that represent whole applications or software services. A custom
-    controller will observe those high-level objects and create low-level objects based on
-    them. For example, to run a messaging broker inside a Kubernetes cluster, all you’ll
-    need to do is create an instance of a Queue resource and all the necessary Secrets,
-    Deployments, and Services will be created by a custom Queue controller. Kubernetes
-    already provides ways of adding custom resources like this. 
