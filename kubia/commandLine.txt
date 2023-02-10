@@ -1,5 +1,2 @@
-Extending Kubernetes (last chapter)
- Providing a custom API server for your custom objects :
-    A better way of adding support for custom objects in Kubernetes is to implement your
-  own API server and have the clients talk directly to it. (to explore in Kubernetes in action book)
-
+Extending Kubernetes with the Kubernetes Service Catalog
+ - to export in Kubernetes in a book
