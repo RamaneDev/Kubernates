@@ -1,2 +1,2 @@
-Extending Kubernetes with the Kubernetes Service Catalog
- - to export in Kubernetes in a book
+Platforms built on top of Kubernetes
+ -> to explore in Kubernetes in action book
