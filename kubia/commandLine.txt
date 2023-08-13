@@ -1,2 +1,125 @@
-Platforms built on top of Kubernetes
- -> to explore in Kubernetes in action book
+abstract of Commands line :
+
+#kubernetes cluster:
+- getting help about resources : 
+  kubectl explain <name of resources>
+
+- getting help about a specific field property of ressource
+  kubectl explain <name-of-resource>.<name-of-field>
+
+- creating on object via yaml file :
+  kubectl create -f <file-name>.yaml
+
+- getting server side logs : 
+  docker logs <container-id>
+
+- getting container logs 
+  kubectl logs <container-name>
+
+- exposing container fia port-forward to test 
+  kubectl port-forward <container-name> 8888:8080 <- accessible localhost: 8888
+
+- adding labels to resource (exemple pod) :
+  kubectl label pod <pod-name> creation_method=manual,env=test (labels is formated in key=value format)
+
+- overwritting lables 
+  kubectl label pod <pod-name> env=debug --overwrite
+
+- listing resources with thier labels:
+  kubectl get <r-name> --show-labels
+
+- printing certain resources that contain a certain key-labels :
+  kubectl get <r-name> -L key-lable1,key-lable2
+
+- filtring resources by lable key=value
+  kubectl get <r-name> -l creation_method=manual
+
+- filtring resources by condition :  
+  kubectl get po -l '!env' get pod does'nt contain key-lable=env
+
+- deleting resouces by label:
+  kubectl delete <resource> -l creation_method=manual
+
+- deleting all resources in namespace:
+  kubectl delete <resource> --all
+
+- getting a list of namespace 
+  kubectl get ns
+
+- getting resource in a specific namespace:
+  kubectl get po --namespace kube-system
+
+- create a resource in an specific namespace :
+  kubectl create -f <f-name>.yaml -n <namespace>
+
+#pod:
+- expose pod :
+  kubectl expose pod <pod-name> --type=LoadBalancer --name kubia-http
+
+- getting pod description:
+  kubectl describe pod <pod-name>
+
+- getting pod yaml file
+  kubectl get po <pod-name> -o yaml
+
+- getting more information about pods
+  kubectl get pods -o wide
+
+- execute a command remotly in pod  -> after -- the commandLine will be executed inside pod remotely
+  kubectl exec <pod-name> -- curl -s http://10.111.249.153
+
+- RUNNING A SHELL IN A POD’S CONTAINER:
+  kubectl exec -it <pod-name> bash
+
+service :
+- type of services to reach pods from outside :
+  * NodePort
+  * LoadBalancer
+  * Ingress
+
+- service to enable pods to communicate within the cluster :
+  *  headless -> allow us to reach some set of pod by FQDN
+
+- get a list of services:
+  kubectl get services
+
+
+
+#replica-controller:
+-listing rc
+ kubectl get replicationcontrollers
+
+-exposing rc via loadBalancer: 
+ kubectl expose rc <rc-name> --type=LoadBalancer --name kubia-http
+
+-scaling pods in rc
+ kubectl scale rc <rc-name> --replicas=3
+
+-deleting rc only not pod that manage 
+ kubectl delete rc kubia --cascade=false
+
+#replica-Set
+
+
+#DeamonSet : ensure that exactly one replica on each node is used for system configuration for exemple
+
+#Job resource: allow as tu run terminates tasks
+
+
+#namespace:
+-create custom namespace:
+ kubectl create -f custom-namespace.yaml -> see file in github
+
+
+#volumes
+ - emptyDir : temporary volume within the pod shared between containers, 
+              It exists as long as the pod is running and is deleted when the pod terminates
+              it used for data sharing between containers 
+
+ - gitRepo : volume that allow to clone gitRepo bat it doesn't encure sync with repo !
+ 
+ - PV : persistante volume <- to define manually by admin
+
+ - PVC: persistante volume claim to claim pv defined using ClassStorage
+
+ - ClassStorage: defined by admin to decouple users from infra
